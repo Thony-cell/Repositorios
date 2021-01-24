@@ -1,1 +1,95 @@
+package Clases;
 
+import java.util.Date;
+import java.util.List;
+
+public class Persona extends AgendaPersonal {
+	
+	protected String nombre;
+	protected Date fechaNacimiento; 
+	protected String genero;
+	protected int cedula;
+	protected int numeroTelefono;
+	
+	public Persona() {}
+	
+	public Persona(String nombre, Date fechaNacimiento,String genero,int cedula, int numeroTelefono ) {
+		this.nombre = nombre;
+		this.fechaNacimiento = fechaNacimiento;
+		this.genero = genero;
+		this.cedula = cedula;
+		this.numeroTelefono = numeroTelefono;
+	}
+
+	//METODOS
+	public void ordenAlfabeticoNombre() {
+		for(int i = 0; i < this.datosDeAmistades.size(); i++) {
+			for(int j = 0; j < this.datosDeAmistades.size(); i++) {
+				if(this.datosDeAmistades.get(i).getNombre().compareToIgnoreCase(this.datosDeAmistades.get(j).getNombre()) < 0) {
+					Amistades lista = this.datosDeAmistades.get(i);
+					this.getDatosDeAmistades().set(i, this.getDatosDeAmistades().get(j));
+					this.getDatosDeAmistades().set(j, lista);
+				}
+			}
+		}
+	}
+	
+	public boolean evitarDatosDuplicados(Object objeto,List datos) {
+		Boolean valor = false;
+		for(int x = 0; x < datos.size() ; x++) {
+			if(datos.get(x).toString().equals(objeto.toString())) {
+				valor = true;
+			}else {
+				valor = false;
+			}
+		}
+		return valor;
+	}
+	
+	@Override
+	public String toString() {
+		return "Nombre: " + this.nombre + " F.Nacimiento: " + this.fechaNacimiento + " genero: " + this.genero + " Cedula: " + this.cedula
+		+ " Numero: " + this.numeroTelefono;
+	}
+
+	//GETTER Y SETTER
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public Date getFechaNacimiento() {
+		return fechaNacimiento;
+	}
+
+	public void setFechaNacimiento(Date fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
+	}
+
+	public String getGenero() {
+		return genero;
+	}
+
+	public void setGenero(String genero) {
+		this.genero = genero;
+	}
+
+	public int getCedula() {
+		return cedula;
+	}
+
+	public void setCedula(int cedula) {
+		this.cedula = cedula;
+	}
+
+	public int getNumeroTelefono() {
+		return numeroTelefono;
+	}
+
+	public void setNumeroTelefono(int numeroTelefono) {
+		this.numeroTelefono = numeroTelefono;
+	}
+}
