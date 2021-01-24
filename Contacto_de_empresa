@@ -1,1 +1,33 @@
+package Clases;
 
+import java.util.Date;
+
+public class ContactosDeEmpresa extends Persona {
+	
+	private String nombreEmpresa;
+
+	public ContactosDeEmpresa(String nombre, Date fechaNacimiento, String genero, int cedula, int numeroTelefono, String nombreEmpresa) {
+		super(nombre, fechaNacimiento, genero, cedula, numeroTelefono);
+		this.nombreEmpresa = nombreEmpresa;
+	}
+	
+	//METODOS
+	public void agregarElemento(ContactosDeEmpresa contactoEmpresa) {
+		this.getDatosEmpresa().add(contactoEmpresa);
+	}
+	
+	@Override
+	public String toString() {
+		return "Nombre: " + this.nombre + " F.Nacimiento: " + this.fechaNacimiento + " genero: " + this.genero + " Cedula: " 
+	+ this.cedula + " Numero: " + this.numeroTelefono + " Empresa: " + this.nombreEmpresa;
+	}
+
+	//GETTER AND SETTER
+	public String getNombreEmpresa() {
+		return nombreEmpresa;
+	}
+
+	public void setNombreEmpresa(String nombreEmpresa) {
+		this.nombreEmpresa = nombreEmpresa;
+	}
+}
