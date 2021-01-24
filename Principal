@@ -1,0 +1,11 @@
+package Principal;
+
+import Clases.AgendaPersonal;
+
+public class Principal {
+	
+	public static void main (String [] args) {
+		AgendaPersonal agenda = new AgendaPersonal();
+		agenda.presentacion();
+	}
+}
