@@ -1,1 +1,33 @@
+package Clases;
 
+import java.util.Date;
+
+public class Amistades extends Persona {
+	
+	private String correoElectronico;
+	
+	public Amistades(String nombre, Date fechaNacimiento, String genero, int cedula, int numeroTelefono, String correoElectronico) {
+		super(nombre, fechaNacimiento, genero, cedula, numeroTelefono);
+		this.correoElectronico = correoElectronico;
+	}
+
+	//METODOS
+	public void agregarElemento(Amistades amistad) {
+		this.getDatosDeAmistades().add(amistad);
+	}
+	
+	@Override
+	public String toString() {
+		return "Nombre: " + this.nombre + " F.Nacimiento: " + this.fechaNacimiento + " genero: " + this.genero + " Cedula: " 
+	+ this.cedula + " Numero: " + this.numeroTelefono + " Correo: " + this.correoElectronico;
+	}
+	
+	//GETTER AND SETTER
+	public String getCorreoElectronico() {
+		return correoElectronico;
+	}
+
+	public void setCorreoElectronico(String correoElectronico) {
+		this.correoElectronico = correoElectronico;
+	}
+}
