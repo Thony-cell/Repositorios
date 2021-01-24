@@ -1,1 +1,365 @@
+package Clases;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Scanner;
+
+public class AgendaPersonal {
+	
+	protected List<Amistades> datosDeAmistades;
+	protected List<Citas> datosDeCita;
+	protected List<ContactosDeEmpresa> datosEmpresa;
+	
+	//EXTRAS QUE SE USARON PARA DESARROLLAR O DISMINUIR EL CODIGO
+	private Scanner datos;
+	private SimpleDateFormat formato;
+	private Date fechaNacimiento;
+	private Date fechaCita;
+	
+	public AgendaPersonal() {
+		datosDeAmistades = new ArrayList<Amistades>();
+		datosDeCita = new ArrayList<Citas>();
+		datosEmpresa = new ArrayList<ContactosDeEmpresa>();
+		datos = new Scanner(System.in);
+		formato = new SimpleDateFormat("yyyy/MM/dd");
+		fechaNacimiento = new Date();
+		fechaCita = new Date();
+	}
+	
+	public void modificacionDeAgenda() {
+		int valor = menu();
+		try {
+			if(valor == 1) {
+				consultarElementos((ArrayList) datosDeAmistades);
+				System.out.println("\nSeleccione el indice  o digite 01 para salir: ");
+				int indice = datos.nextInt();
+				if(indice == 01) {
+					presentacion();
+				}else{
+					System.out.println("Nombre ");
+					String nombre = datos.next();
+					System.out.println("Fecha nacimiento(yyyy/MM/dd): ");
+					String fNacimiento = datos.next();
+					fechaNacimiento = formato.parse(fNacimiento);
+					System.out.println("Genero: ");
+					String genero = datos.next();
+					System.out.println("Cedula: ");
+					int cedula = datos.nextInt();
+					System.out.println("Telefono: ");
+					int telefono = datos.nextInt();
+					System.out.println("Correo: ");
+					String correo = datos.next();
+					datosDeAmistades.get(indice).setNombre(nombre);
+					datosDeAmistades.get(indice).setFechaNacimiento(fechaNacimiento);
+					datosDeAmistades.get(indice).setGenero(genero);
+					datosDeAmistades.get(indice).setCedula(cedula);
+					datosDeAmistades.get(indice).setNumeroTelefono(telefono);
+					datosDeAmistades.get(indice).setCorreoElectronico(correo);
+					presentacion();
+				}
+			}else if(valor == 2) {
+				consultarElementos((ArrayList) datosEmpresa);
+				System.out.println("\nSeleccione el indice o digite 01 para salir: ");
+				int indice = datos.nextInt();
+				if(indice  == 01) {
+					presentacion();
+				}else {
+					System.out.println("Nombre ");
+					String nombreContactoEmpresa = datos.next();
+					System.out.println("Fecha nacimiento(yyyy/MM/dd): ");
+					String fNacimientoEmpresa = datos.next();
+					fechaNacimiento = formato.parse(fNacimientoEmpresa);
+					System.out.println("Genero: ");
+					String generoEmpresa = datos.next();
+					System.out.println("Cedula: ");
+					int cedulaEmpresa = datos.nextInt();
+					System.out.println("Telefono: ");
+					int telefonoEmpresa = datos.nextInt();
+					System.out.println("Empresa: ");
+					String nombreEmpresa = datos.next();
+					datosEmpresa.get(indice).setNombre(nombreEmpresa);
+					datosEmpresa.get(indice).setFechaNacimiento(fechaNacimiento);
+					datosEmpresa.get(indice).setGenero(generoEmpresa);
+					datosEmpresa.get(indice).setCedula(cedulaEmpresa);
+					datosEmpresa.get(indice).setNumeroTelefono(telefonoEmpresa);
+					datosEmpresa.get(indice).setNombreEmpresa(nombreEmpresa);
+					presentacion();
+				}
+				presentacion();
+			}else if(valor == 3) {
+				consultarElementos((ArrayList) datosDeCita);
+				System.out.println("\nSeleccione el indice o digite 01 para salir: ");
+				int indice = datos.nextInt();
+				if(indice == 01) {
+					presentacion();
+				}else {
+					System.out.println("Nombre ");
+					String nombreCita = datos.next();
+					
+					System.out.println("Fecha nacimiento(yyyy/MM/DD): ");
+					String fNacimientoCita = datos.next();
+					fechaNacimiento = formato.parse(fNacimientoCita);
+					
+					System.out.println("Genero: ");
+					String generoCita = datos.next();
+					
+					System.out.println("Cedula: ");
+					int cedulaCita = datos.nextInt();
+					
+					System.out.println("Telefono: ");
+					int telefonoCita = datos.nextInt();
+					
+					System.out.println("Fecha de cita(yyyy/MM/dd): ");
+					String cita = datos.next();
+					fechaCita = formato.parse(cita);
+					
+					System.out.println("Hora inicio: ");
+					int horaInicio = datos.nextInt();
+					
+					System.out.println("Hora salida: ");
+					int horaSalida = datos.nextInt();
+					
+					System.out.println("Lugar ");
+					String lugar = datos.next();
+					
+					datosDeCita.get(indice).setNombre(nombreCita);
+					datosDeCita.get(indice).setFechaNacimiento(fechaNacimiento);
+					datosDeCita.get(indice).setGenero(generoCita);
+					datosDeCita.get(indice).setCedula(cedulaCita);
+					datosDeCita.get(indice).setNumeroTelefono(telefonoCita);
+					datosDeCita.get(indice).setFecha(fechaCita);
+					datosDeCita.get(indice).setHoraInicio(horaInicio);
+					datosDeCita.get(indice).setHoraFin(horaSalida);
+					datosDeCita.get(indice).setLugar(lugar);
+				}
+				presentacion();
+			}else if(valor ==4) {
+				System.out.print("Error, vuelva a intentarlo");
+				presentacion();
+			}
+		}catch(Exception e){}
+	}
+	
+	public void eliminarElemento() {
+		int valor = menu();
+		try {
+			if(valor == 1) {
+				consultarElementos((ArrayList) datosDeAmistades);
+				System.out.println("\nSeleccione el indice o digite algo para salir: ");
+				int indice = datos.nextInt();
+				eliminacion(indice,(ArrayList) datosDeAmistades);
+				presentacion();
+			}else if(valor == 2) {
+				consultarElementos((ArrayList) datosEmpresa);
+				System.out.println("\nSeleccione el indice o digite algo para salir: ");
+				int indice = datos.nextInt();
+				eliminacion(indice,(ArrayList) datosEmpresa);
+				presentacion();
+			}else if(valor == 3) {
+				consultarElementos((ArrayList) datosDeCita);
+				System.out.println("\nSeleccione el indice o digite algo para salir: ");
+				int indice = datos.nextInt();
+				eliminacion(indice,(ArrayList) datosDeCita);
+				presentacion();
+			}else if(valor ==4) {
+				presentacion();
+			}else {
+				System.out.print("Error, vuelva a intentarlo");
+				presentacion();
+			}
+		}catch(Exception e){
+			System.out.print("No se ha encontrado elemento");
+			presentacion();
+		}
+	}
+	
+	public void agregarElementos() {
+		menuDeAgregarDatos();
+	}
+	
+	//EXTRAS - Subprocesos
+	private int menu() {
+		System.out.println("\n----------MENU----------");
+		System.out.println("\n1) Lista de amistades \n2) Lista de empresa\n3) Lista de cita\n4) Salir");
+		System.out.print("Opcion[1/4]: ");
+		int inicio = datos.nextInt();
+		return inicio;
+	}
+	
+	private void consultarElementos(ArrayList objeto) {
+		for(int x = 0; x < objeto.size(); x++) {
+			System.out.println(x + " - " + objeto.get(x).toString());
+		}
+	}
+	
+	private void eliminacion(int indice, ArrayList objeto) {
+		objeto.remove(indice);
+	}
+	
+	public void presentacion() {
+		System.out.println("\n----------MENU----------");
+		System.out.println("\n1) Agregar datos\n2) Consultar y Modificar elemento\n3) Eliminar elemento\n4) Salir");
+		System.out.print("Opcion[1/4]: ");
+		int inicio = datos.nextInt();
+		
+		try {
+			switch (inicio) {
+			case 1:
+				agregarElementos();
+				break;
+			case 2:
+				modificacionDeAgenda();
+				break;
+			case 3:
+				eliminarElemento();
+				break;
+			case 4: 
+				System.out.print("Saliendo del sistema");
+				System.exit(0);
+				break;
+			}	
+		}catch(Exception e) {
+			System.out.print("Vuelva a intentar");
+			presentacion();
+		}
+	}
+	
+	private void menuDeAgregarDatos() {
+		System.out.println("\n----------SECCION DE AGREGACION DE DATOS----------");
+		System.out.println("\n1) Agregar Amistad\n2) Agregar contacto empresa\n3) Agregar cita\n4) Salir");
+		System.out.print("Opcion[1/4]: ");
+		int inicio = datos.nextInt();
+		try {
+			switch (inicio) {
+			case 1:
+				System.out.println("Nombre ");
+				String nombre = datos.next();
+				System.out.println("Fecha nacimiento (yyyy/MM/DD): ");
+				String fNacimiento = datos.next();
+				fechaNacimiento = formato.parse(fNacimiento);
+				System.out.println("Genero: ");
+				String genero = datos.next();
+				System.out.println("Cedula: ");
+				int cedula = datos.nextInt();
+				System.out.println("Telefono: ");
+				int telefono = datos.nextInt();
+				System.out.println("Correo: ");
+				String correo = datos.next();
+				Amistades amistad = new Amistades(nombre, fechaNacimiento, genero, cedula, telefono, correo);
+				Boolean valor = new Persona().evitarDatosDuplicados(amistad, this.datosDeAmistades);
+				if(valor == true) {
+					System.out.println("Ya existe");
+					presentacion();
+				}else {
+					this.datosDeAmistades.add(amistad);
+					presentacion();
+				}
+				break;
+			case 2:
+				System.out.println("Nombre ");
+				String nombreContactoEmpresa = datos.next();
+				System.out.println("Fecha nacimiento (yyyy/MM/dd): ");
+				String fNacimientoEmpresa = datos.next();
+				fechaNacimiento = formato.parse(fNacimientoEmpresa);
+				System.out.println("Genero: ");
+				String generoEmpresa = datos.next();
+				System.out.println("Cedula: ");
+				int cedulaEmpresa = datos.nextInt();
+				System.out.println("Telefono: ");
+				int telefonoEmpresa = datos.nextInt();
+				System.out.println("Empresa: ");
+				String nombreEmpresa = datos.next();
+				ContactosDeEmpresa empresa = new ContactosDeEmpresa(nombreContactoEmpresa, fechaNacimiento, generoEmpresa, 
+						cedulaEmpresa, telefonoEmpresa, nombreEmpresa);
+				Boolean valorEmpresa = new Persona().evitarDatosDuplicados(empresa, this.datosEmpresa);
+				if(valorEmpresa == true) {
+					System.out.println("Ya existe");
+					presentacion();
+				}else {
+					this.datosEmpresa.add(empresa);
+					presentacion();
+				}
+				break;
+			case 3: 
+				System.out.println("Nombre ");
+				String nombreCita = datos.next();
+				
+				System.out.println("Fecha nacimiento (yyyy/MM/dd): ");
+				String fNacimientoCita = datos.next();
+				fechaNacimiento = formato.parse(fNacimientoCita);
+				
+				System.out.println("Genero: ");
+				String generoCita = datos.next();
+				
+				System.out.println("Cedula: ");
+				int cedulaCita = datos.nextInt();
+				
+				System.out.println("Telefono: ");
+				int telefonoCita = datos.nextInt();
+				
+				System.out.println("Fecha de cita (yyyy/MM/dd): ");
+				String cita = datos.next();
+				fechaCita = formato.parse(cita);
+				
+				System.out.println("Hora inicio: ");
+				int horaInicio = datos.nextInt();
+				
+				System.out.println("Hora salida: ");
+				int horaSalida = datos.nextInt();
+				
+				System.out.println("Lugar ");
+				String lugar = datos.next();
+				
+				Citas citas = new Citas(nombreCita, fechaNacimiento, generoCita, cedulaCita, telefonoCita, fechaCita, horaInicio,
+						horaSalida, lugar);
+				Boolean valorCita = new Persona().evitarDatosDuplicados(citas, this.datosDeCita);
+				if(valorCita == true) {
+					System.out.println("Ya existe");
+					presentacion();
+				}else {
+					this.datosDeCita.add(citas);
+					presentacion();
+				}
+				break;
+			case 4: 
+				presentacion();
+				break;
+			}	
+		}catch(Exception e) {}
+	}
+
+	//GETTER AND SETTER
+	public Scanner getDatos() {
+		return datos;
+	}
+
+	public void setDatos(Scanner datos) {
+		this.datos = datos;
+	}
+
+	public List<Amistades> getDatosDeAmistades() {
+		return datosDeAmistades;
+	}
+
+	public void setDatosDeAmistades(List<Amistades> datosDeAmistades) {
+		this.datosDeAmistades = datosDeAmistades;
+	}
+
+	public List<Citas> getDatosDeCita() {
+		return datosDeCita;
+	}
+
+	public void setDatosDeCita(List<Citas> datosDeCita) {
+		this.datosDeCita = datosDeCita;
+	}
+
+	public List<ContactosDeEmpresa> getDatosEmpresa() {
+		return datosEmpresa;
+	}
+
+	public void setDatosEmpresa(List<ContactosDeEmpresa> datosEmpresa) {
+		this.datosEmpresa = datosEmpresa;
+	}
+}
