@@ -1,1 +1,82 @@
+package Clases;
 
+import java.awt.List;
+import java.util.Date;
+
+public class Citas extends Persona {
+	
+	private Date fecha;
+	private int horaInicio;
+	private int horaFin;
+	private String lugar;
+
+	public Citas(String nombre, Date fechaNacimiento, String genero, int cedula, int numeroTelefono, Date fecha, 
+			int horaInicio, int horaFin, String lugar) {
+		super(nombre, fechaNacimiento, genero, cedula, numeroTelefono);
+		this.fecha = fecha;
+		this.horaInicio = horaInicio;
+		this.horaFin = horaFin;
+		this.lugar = lugar;
+	}
+	
+	public void agregarElementos(Citas cita) {
+		this.datosDeCita.add(cita);
+	}
+	
+	public void eliminarElementos(int indice, List lista) {
+		lista.remove(indice);
+	}
+	
+	public void ordenarCitaPorFecha() {}
+	
+	public Boolean noHorariosRepetidos(Citas objeto ) {
+		Boolean valor = false;
+		for(int x = 0; x < this.getDatosDeCita().size() ; x++) {
+			if(objeto.getFecha().equals(this.getDatosDeCita().get(x).getFecha())) {
+				valor = true;
+			}else {
+				valor = false;
+			}
+		}
+		return valor;
+	}
+	
+	@Override
+	public String toString() {
+		return "Nombre: " + this.nombre + " F.Nacimiento: " + this.fechaNacimiento + " genero: " + this.genero + " Cedula: " 
+	+ this.cedula + " Numero: " + this.numeroTelefono + " Fecha: " + this.fecha + " Hora inicio: " + this.horaInicio + " Hora fin "
+				+ this.horaFin + " lugar: " + this.lugar;
+	}
+	
+	public Date getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
+	}
+
+	public int getHoraInicio() {
+		return horaInicio;
+	}
+
+	public void setHoraInicio(int horaInicio) {
+		this.horaInicio = horaInicio;
+	}
+
+	public int getHoraFin() {
+		return horaFin;
+	}
+
+	public void setHoraFin(int horaFin) {
+		this.horaFin = horaFin;
+	}
+
+	public String getLugar() {
+		return lugar;
+	}
+
+	public void setLugar(String lugar) {
+		this.lugar = lugar;
+	}
+}
